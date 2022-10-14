@@ -2,11 +2,13 @@
 package com.main.screen;
 
 /* Import main */
-import com.main.Config;
 import com.main.Game;
 
 /* Import awt */
 import java.awt.Graphics;
+
+/* Import awt event */
+import java.awt.event.KeyEvent;
 
 /* Class Screen */
 public abstract class Screen {
@@ -18,8 +20,17 @@ public abstract class Screen {
 		this.game = game;
 	}
 
-	/* Actions when changing the screen */
-	public abstract void change();
+	/* Action when switching to this screen */
+	protected abstract void doEnterScreen();
+
+	/* Action when switching to another screen */
+	protected abstract void doExitScreen();
+
+	/* Key pressed */
+	public void keyPressed(KeyEvent e) {}
+
+	/* Key released */
+	public void keyReleased(KeyEvent e) {}
 
 	/* Update data on screen */
 	public abstract void update();
@@ -28,10 +39,11 @@ public abstract class Screen {
 	public abstract void draw(Graphics g);
 
 	/* Change screen */
-	private void changeScreen(int index) {
+	public void changeScreen(int index) {
 	
+		game.currentScreen.doExitScreen();
 		game.currentScreen = game.screens.get(index);
-		game.currentScreen.change();
+		game.currentScreen.doEnterScreen();
 	
 	}
 

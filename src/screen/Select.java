@@ -2,12 +2,14 @@
 package com.main.screen;
 
 /* Import main */
-import com.main.Config;
 import com.main.Game;
 
 /* Import awt */
 import java.awt.Color;
 import java.awt.Graphics;
+
+/* Import awt event */
+import java.awt.event.KeyEvent;
 
 /* Class Select extends Screen */
 public class Select extends Screen {
@@ -17,9 +19,17 @@ public class Select extends Screen {
 		super(game);
 	}
 
-	/* Actions when changing the screen */
+	/* Action when switching to this screen */
 	@Override
-	public void change() {
+	protected void doEnterScreen() {
+		System.out.println("Select: enter screen");
+
+	}
+
+	/* Action when switching to another screen */
+	@Override
+	protected void doExitScreen() {
+		System.out.println("Select: exit screen");
 
 	}
 
@@ -32,9 +42,7 @@ public class Select extends Screen {
 	/* Draw on screen */
 	@Override
 	public void draw(Graphics g) {
-        g.setColor(Color.black);
-        g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
-
+		
 	}
 
 }

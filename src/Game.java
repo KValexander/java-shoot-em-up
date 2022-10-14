@@ -7,6 +7,8 @@ import com.main.screen.*;
 /* Import utils */
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /* Import awt */
 import java.awt.Color;
@@ -17,6 +19,8 @@ import java.awt.Graphics2D;
 /* Import awt event */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /* Import swing */
 import javax.swing.JFrame;
@@ -27,8 +31,8 @@ import javax.swing.AbstractAction;
 /*	Sections:
 		- Varibles
 		- Constructor
-		- Init
-		- Setup
+		- Init (Window, Game, Screens)
+		- Init KeyListener
 		- Update
 		- GameLoop (start Timer and tick)
 		- Draw
@@ -43,13 +47,15 @@ public class Game extends JPanel {
 	public List<Screen> screens; // screen list
 	public Screen currentScreen; // curren screen
 
+	/* Pressed keys */
+	public Set<Integer> pKeys = new HashSet<>();
+
+
 	/* Constructor */
 	public Game() {
 
 		initWindow(); // init window
-		setupGame(); // setup game
-
-		startTimer(); // start game loop
+		initGame(); // init game
 
 	}
 
@@ -62,40 +68,78 @@ public class Game extends JPanel {
 		window.setSize(Config.SCREEN[0], Config.SCREEN[1]);
 		window.setTitle("Mercenaries of fortune");
 		window.setResizable(false);
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
 
 		/* Add game panel to frame */
 		window.add(this);
 
+		/* Visible window */
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
+
 		/* Game panel */
 		setPreferredSize(new Dimension(Config.SCREEN[0], Config.SCREEN[1]));
 		setBackground(new Color(0x4cb5f5));
+		setDoubleBuffered(true);
 		setFocusable(true);
 
 	}
 
-	/* Setup Game */
-	private void setupGame() {
+	/* Init Game */
+	private void initGame() {
 
-		/* Setup screens */
-		setupScreens();
+		initScreens(); // init screens
+		initKeyListener(); // init key listener
+
+		startTimer(); // start game loop
 
 	}
 
-	/* Setup Screens */
-	private void setupScreens() {
+	/* Init Screens */
+	private void initScreens() {
 
 		/* Screen list */
 		screens = new ArrayList<>();
 
+		/* Screens */
+		Screen scMenu 	= new Menu	(this);
+		Screen scSelect = new Select(this);
+		Screen scLevel 	= new Level	(this);
+
 		/* Add screens to list */
-		screens.add(new Menu(this));
-		screens.add(new Select(this));
-		screens.add(new Level(this));
+		screens.add(scMenu);
+		screens.add(scSelect);
+		screens.add(scLevel);
 
 		/* Current screen */
-		currentScreen = screens.get(0);
+		currentScreen = scMenu;
+
+	}
+
+	/* Init key listener */
+	private void initKeyListener() {
+
+		/* Add key listener */
+		addKeyListener(new KeyAdapter() {
+
+			/* Key pressed */
+			@Override
+			public void keyPressed(KeyEvent e) {
+				pKeys.add(e.getKeyCode()); // add pressed key
+
+				/* Key pressed on the screen */
+				currentScreen.keyPressed(e);
+			}
+
+			/* Key released */
+			@Override
+			public void keyReleased(KeyEvent e) {
+				pKeys.remove(e.getKeyCode()); // remove pressed key
+
+				/* Key released on the screen */
+				currentScreen.keyReleased(e);
+			}
+
+		});
 
 	}
 
@@ -132,8 +176,8 @@ public class Game extends JPanel {
 		update(); // update data
 		repaint(); // redraw
 
-		/* FPS and DELAY */
-		System.out.println("FPS: " + Config.FPS + ", DELAY: " + Config.DELAY);
+		/* FPS */
+		// System.out.println("FPS: " + Config.FPS);
 	
 	}
 
@@ -146,10 +190,10 @@ public class Game extends JPanel {
 
 	/* Render game elements */
 	private void draw(Graphics g) {
-		
+
 		/* Background */
-        g.setColor(new Color(0x4cb5f5));
-        g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
+		g.setColor(new Color(0x4cb5f5));
+		g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
 
 		/* Draw current screen */
 		currentScreen.draw(g);
