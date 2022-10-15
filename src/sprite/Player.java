@@ -1,5 +1,5 @@
 /* Package */
-package com.main.screen.sprite;
+package com.main.sprite;
 
 /* Import Config */
 import com.main.Config;
@@ -12,11 +12,13 @@ public class Player extends Sprite {
 
 	/* Constructor */
 	public Player() {
-		ImageIcon ii = new ImageIcon("assets/player.png");
-		int width = ii.getImage().getWidth(null);
-		setImage(ii.getImage());
-		x = Config.SCREEN[0] / 2 - width / 2;
-		y = 164;
+
+		/* Set player image */
+		setImage(new ImageIcon("assets/player.png").getImage());
+
+		/* Set start position */
+		setPos("center");
+
 	}
 
 }

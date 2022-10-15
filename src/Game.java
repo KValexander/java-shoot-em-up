@@ -31,7 +31,7 @@ import javax.swing.AbstractAction;
 /*	Sections:
 		- Varibles
 		- Constructor
-		- Init (Window, Game, Screens)
+		- Init (Window, Render, Game, Screens)
 		- Init KeyListener
 		- Update
 		- GameLoop (start Timer and tick)
@@ -41,8 +41,13 @@ import javax.swing.AbstractAction;
 /* Class Game extends JPanel */
 public class Game extends JPanel {
 
+	private boolean isStart; // start game
+
 	private JFrame window; // window
 	private Timer timer; // Timer for game loop
+
+	/* Rendering game objects */
+	public Render render;
 
 	public List<Screen> screens; // screen list
 	public Screen currentScreen; // curren screen
@@ -54,8 +59,13 @@ public class Game extends JPanel {
 	/* Constructor */
 	public Game() {
 
+		isStart = false; // start false
+
 		initWindow(); // init window
+		initRender(); // init render
 		initGame(); // init game
+		
+		isStart = true; // start true
 
 	}
 
@@ -84,6 +94,13 @@ public class Game extends JPanel {
 
 	}
 
+	/* Init render */
+	private void initRender() {
+
+		render = new Render(this); // render
+
+	}
+
 	/* Init Game */
 	private void initGame() {
 
@@ -101,9 +118,9 @@ public class Game extends JPanel {
 		screens = new ArrayList<>();
 
 		/* Screens */
-		Screen scMenu 	= new Menu	(this);
-		Screen scSelect = new Select(this);
-		Screen scLevel 	= new Level	(this);
+		Screen scMenu 	= new Menu	(this, render);
+		Screen scSelect = new Select(this, render);
+		Screen scLevel 	= new Level	(this, render);
 
 		/* Add screens to list */
 		screens.add(scMenu);
@@ -112,6 +129,7 @@ public class Game extends JPanel {
 
 		/* Current screen */
 		currentScreen = scMenu;
+		currentScreen.doEnterScreen();
 
 	}
 
@@ -175,29 +193,27 @@ public class Game extends JPanel {
 
 		update(); // update data
 		repaint(); // redraw
-
-		/* FPS */
-		// System.out.println("FPS: " + Config.FPS);
 	
 	}
-
 
 	/* Paint component */
 	@Override
 	public void paintComponent(Graphics g) {
-		draw(g); // render game elements
+		super.paintComponent(g); // parent
+		render.render(g); // rendering game objects
+		g.dispose(); // dispose
 	}
 
-	/* Render game elements */
-	private void draw(Graphics g) {
+	// /* Render game elements */
+	// private void draw(Graphics g) {
 
-		/* Background */
-		g.setColor(new Color(0x4cb5f5));
-		g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
+	// 	/* Background */
+	// 	g.setColor(new Color(0x4cb5f5));
+	// 	g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
 
-		/* Draw current screen */
-		currentScreen.draw(g);
+	// 	/* Draw current screen */
+	// 	currentScreen.draw(g);
 
-	}
+	// }
 
 }

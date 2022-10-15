@@ -3,6 +3,10 @@ package com.main.screen;
 
 /* Import main */
 import com.main.Game;
+import com.main.Render;
+
+/* Import sprite */
+import com.main.sprite.Player;
 
 /* Import awt */
 import java.awt.Color;
@@ -14,20 +18,25 @@ import java.awt.event.KeyEvent;
 /* Class Level extends Screen */
 public class Level extends Screen {
 
+	private Player player; // player
+
 	/* Constructor */
-	public Level(Game game) {
-		super(game);
+	public Level(Game game, Render render) {
+		super(game, render);
 	}
 
 	/* Action when switching to this screen */
 	@Override
-	protected void doEnterScreen() {
+	public void doEnterScreen() {
 		System.out.println("Level: enter screen");
+
+		player = new Player(); // create player
+		render.addSprite(player);
 	}
 
 	/* Action when switching to another screen */
 	@Override
-	protected void doExitScreen() {
+	public void doExitScreen() {
 		System.out.println("Level: exit screen");
 	}
 
@@ -35,12 +44,6 @@ public class Level extends Screen {
 	@Override
 	public void update() {
 
-	}
-
-	/* Draw on screen */
-	@Override
-	public void draw(Graphics g) {
-		
 	}
 
 }

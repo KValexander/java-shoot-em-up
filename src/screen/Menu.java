@@ -1,11 +1,9 @@
 /* Package */
 package com.main.screen;
 
-/* Import sprites */
-import com.main.screen.sprite.*;
-
 /* Import main */
 import com.main.Game;
+import com.main.Render;
 
 /* Import awt */
 import java.awt.Color;
@@ -17,25 +15,22 @@ import java.awt.event.KeyEvent;
 /* Class Menu extends Screen */
 public class Menu extends Screen {
 
-	private Player player; // player
-
 	/* Constructor */
-	public Menu(Game game) {
-		super(game);
-
-		/* Player */
-		player = new Player();
+	public Menu(Game game, Render render) {
+		super(game, render);
 	}
 
 	/* Action when switching to this screen */
 	@Override
-	protected void doEnterScreen() {
+	public void doEnterScreen() {
 		System.out.println("Menu: enter screen");
+
+		changeScreen(2);
 	}
 
 	/* Action when switching to another screen */
 	@Override
-	protected void doExitScreen() {
+	public void doExitScreen() {
 		System.out.println("Menu: exit screen");
 	}
 
@@ -43,14 +38,6 @@ public class Menu extends Screen {
 	@Override
 	public void update() {
 
-	}
-
-	/* Draw on screen */
-	@Override
-	public void draw(Graphics g) {
-
-		/* Draw player */
-		g.drawImage(player.getImage(), player.getX(), player.getY(), game);
 	}
 
 }

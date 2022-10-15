@@ -3,6 +3,7 @@ package com.main.screen;
 
 /* Import main */
 import com.main.Game;
+import com.main.Render;
 
 /* Import awt */
 import java.awt.Graphics;
@@ -13,18 +14,20 @@ import java.awt.event.KeyEvent;
 /* Class Screen */
 public abstract class Screen {
 
-	public Game game; // game panel
+	protected Game game; // game panel
+	protected Render render; // render
 
 	/* Constructor */
-	public Screen(Game game) {
+	public Screen(Game game, Render render) {
 		this.game = game;
+		this.render = render;
 	}
 
 	/* Action when switching to this screen */
-	protected abstract void doEnterScreen();
+	public abstract void doEnterScreen();
 
 	/* Action when switching to another screen */
-	protected abstract void doExitScreen();
+	public abstract void doExitScreen();
 
 	/* Key pressed */
 	public void keyPressed(KeyEvent e) {}
@@ -34,9 +37,6 @@ public abstract class Screen {
 
 	/* Update data on screen */
 	public abstract void update();
-
-	/* Draw on screen */
-	public abstract void draw(Graphics g);
 
 	/* Change screen */
 	public void changeScreen(int index) {

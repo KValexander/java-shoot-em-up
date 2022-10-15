@@ -3,6 +3,7 @@ package com.main.screen;
 
 /* Import main */
 import com.main.Game;
+import com.main.Render;
 
 /* Import awt */
 import java.awt.Color;
@@ -15,20 +16,19 @@ import java.awt.event.KeyEvent;
 public class Select extends Screen {
 
 	/* Constructor */
-	public Select(Game game) {
-		super(game);
+	public Select(Game game, Render render) {
+		super(game, render);
 	}
 
 	/* Action when switching to this screen */
 	@Override
-	protected void doEnterScreen() {
+	public void doEnterScreen() {
 		System.out.println("Select: enter screen");
-
 	}
 
 	/* Action when switching to another screen */
 	@Override
-	protected void doExitScreen() {
+	public void doExitScreen() {
 		System.out.println("Select: exit screen");
 
 	}
@@ -37,12 +37,6 @@ public class Select extends Screen {
 	@Override
 	public void update() {
 
-	}
-
-	/* Draw on screen */
-	@Override
-	public void draw(Graphics g) {
-		
 	}
 
 }
