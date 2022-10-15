@@ -22,7 +22,6 @@ import java.awt.Graphics2D;
 
 /* Import awt event */
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -216,17 +215,5 @@ public class Game extends JPanel {
 
 		g2d.dispose(); // dispose
 	}
-
-	// /* Render game elements */
-	// private void draw(Graphics g) {
-
-	// 	/* Background */
-	// 	g.setColor(new Color(0x4cb5f5));
-	// 	g.fillRect(0, 0, Config.SCREEN[0], Config.SCREEN[1]);
-
-	// 	/* Draw current screen */
-	// 	currentScreen.draw(g);
-
-	// }
 
 }

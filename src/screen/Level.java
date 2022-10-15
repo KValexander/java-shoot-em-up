@@ -17,10 +17,6 @@ import com.main.sprite.Enemy;
 import java.util.Set;
 import java.util.HashSet;
 
-/* Import awt */
-import java.awt.Color;
-import java.awt.Graphics;
-
 /* Import awt event */
 import java.awt.event.KeyEvent;
 

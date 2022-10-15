@@ -8,10 +8,6 @@ import com.main.Game;
 import com.main.engine.Render;
 import com.main.engine.Collision;
 
-/* Import awt */
-import java.awt.Color;
-import java.awt.Graphics;
-
 /* Import awt event */
 import java.awt.event.KeyEvent;
 
