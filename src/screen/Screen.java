@@ -3,10 +3,10 @@ package com.main.screen;
 
 /* Import main */
 import com.main.Game;
-import com.main.Render;
 
-/* Import awt */
-import java.awt.Graphics;
+/* Import engine */
+import com.main.engine.Render;
+import com.main.engine.Collision;
 
 /* Import awt event */
 import java.awt.event.KeyEvent;
@@ -16,11 +16,13 @@ public abstract class Screen {
 
 	protected Game game; // game panel
 	protected Render render; // render
+	protected Collision collision; // collision
 
 	/* Constructor */
-	public Screen(Game game, Render render) {
+	public Screen(Game game, Render render, Collision collision) {
 		this.game = game;
 		this.render = render;
+		this.collision = collision;
 	}
 
 	/* Action when switching to this screen */

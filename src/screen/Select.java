@@ -3,7 +3,10 @@ package com.main.screen;
 
 /* Import main */
 import com.main.Game;
-import com.main.Render;
+
+/* Import engine */
+import com.main.engine.Render;
+import com.main.engine.Collision;
 
 /* Import awt */
 import java.awt.Color;
@@ -16,8 +19,8 @@ import java.awt.event.KeyEvent;
 public class Select extends Screen {
 
 	/* Constructor */
-	public Select(Game game, Render render) {
-		super(game, render);
+	public Select(Game game, Render render, Collision collision) {
+		super(game, render, collision);
 	}
 
 	/* Action when switching to this screen */

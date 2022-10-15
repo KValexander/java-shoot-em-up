@@ -4,37 +4,62 @@ package com.main.sprite;
 /* Import Config */
 import com.main.Config;
 
-/* Import awt image */
-import java.awt.Image;
+/* Import awt */
+import java.awt.Rectangle;
+
+/* Import for load image */
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 /* Class Sprite */
 public class Sprite {
 
-	private Image image; // image
-	private boolean isImage; // image presence state
+	private BufferedImage image; // image
+	private boolean collision = false; // collision state
 
-	int x, y; // position
-	int w, h; // size
-	int dx, dy; // acceleration
+	public boolean debug = true; // debug
+
+	/* Position */
+	int x = 0;
+	int y = 0;
+
+	/* Size */
+	int width = 0;
+	int height = 0;
+
+	/* Acceleration */
+	float dx = 0;
+	float dy = 0;
 
 	/* Set image */
-	public void setImage(Image image) {
-		this.image = image;
-		w = this.image.getWidth(null);
-		h = this.image.getHeight(null);
-		isImage = true;
-	}
+	public void setImage(String src) {
 
-	/* Resize image */
-	public void resizeImage(int w, int h) {
-		this.image = this.image.getScaledInstance(w, h, Image.SCALE_DEFAULT);
-		this.w = w;
-		this.h = h;
+		/* Load image */
+		try {
+			image = ImageIO.read(new File(src));
+		}
+		
+		/* Error load image */
+		catch (IOException e) {
+			System.out.println("Exception occured: " + e.getMessage());
+		}
+		
+		/* Get size from image */
+		width = image.getWidth(null);
+		height = image.getHeight(null);
+
 	}
 
 	/* Get image */
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return image;
+	}
+
+	/* Get sprite bounds */
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, width, height);
 	}
 
 	/* Set Position (x, y) */
@@ -47,7 +72,7 @@ public class Sprite {
 	public void setPos(String namePosition) {
 
 		/* Width centering */
-		x = Config.SCREEN[0] / 2 - w / 2;
+		x = Config.SCREEN[0] / 2 - width / 2;
 
 		/* Prepared positions */
 		switch (namePosition) {
@@ -59,12 +84,12 @@ public class Sprite {
 
 			/* Center position */ 
 			case "center":
-				y = Config.SCREEN[1] / 2 - h / 2; 
+				y = Config.SCREEN[1] / 2 - height / 2; 
 			break;
 
 			/* Down position */
 			case "down":
-				y = Config.SCREEN[1] - h; 
+				y = Config.SCREEN[1] - height; 
 			break;
 
 		}
@@ -91,14 +116,30 @@ public class Sprite {
 		return y;
 	}
 
+	/* Set size */
+	public void setSize(int w, int h) {
+		width = w;
+		height = h;
+	}
+
 	/* Get Width */
 	public int getWidth() {
-		return w;
+		return width;
 	}
 
 	/* Get Height */
 	public int getHeight() {
-		return h;
+		return height;
+	}
+
+	/* Set collision */
+	public void setCollision(boolean collision) {
+		this.collision = collision;
+	}
+
+	/* Check collision */
+	public boolean onCollision() {
+		return collision;
 	}
 
 }

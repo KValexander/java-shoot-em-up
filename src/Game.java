@@ -1,6 +1,10 @@
 /* Package */
 package com.main;
 
+/* Import engine */
+import com.main.engine.Render;
+import com.main.engine.Collision;
+
 /* Import screens */
 import com.main.screen.*;
 
@@ -46,8 +50,9 @@ public class Game extends JPanel {
 	private JFrame window; // window
 	private Timer timer; // Timer for game loop
 
-	/* Rendering game objects */
-	public Render render;
+	/* Engine */
+	public Render render; // rendering game objects
+	public Collision collision; // collision game objects
 
 	public List<Screen> screens; // screen list
 	public Screen currentScreen; // curren screen
@@ -62,7 +67,7 @@ public class Game extends JPanel {
 		isStart = false; // start false
 
 		initWindow(); // init window
-		initRender(); // init render
+		initEngine(); // init render
 		initGame(); // init game
 		
 		isStart = true; // start true
@@ -94,10 +99,11 @@ public class Game extends JPanel {
 
 	}
 
-	/* Init render */
-	private void initRender() {
+	/* Init engine */
+	private void initEngine() {
 
 		render = new Render(this); // render
+		collision = new Collision(this); // collision
 
 	}
 
@@ -118,9 +124,9 @@ public class Game extends JPanel {
 		screens = new ArrayList<>();
 
 		/* Screens */
-		Screen scMenu 	= new Menu	(this, render);
-		Screen scSelect = new Select(this, render);
-		Screen scLevel 	= new Level	(this, render);
+		Screen scMenu 	= new Menu	(this, render, collision);
+		Screen scSelect = new Select(this, render, collision);
+		Screen scLevel 	= new Level	(this, render, collision);
 
 		/* Add screens to list */
 		screens.add(scMenu);
@@ -167,6 +173,9 @@ public class Game extends JPanel {
 		/* Update current screen */
 		currentScreen.update();
 
+		/* Collision game objects */
+		collision.collision();
+
 	}
 
 	/* Start Timer */
@@ -200,8 +209,12 @@ public class Game extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // parent
-		render.render(g); // rendering game objects
-		g.dispose(); // dispose
+		Graphics2D g2d = (Graphics2D)g;
+
+		/* Rendering game objects */
+		render.render(g2d);
+
+		g2d.dispose(); // dispose
 	}
 
 	// /* Render game elements */
