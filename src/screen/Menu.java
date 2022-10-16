@@ -11,13 +11,8 @@ import com.main.engine.Collision;
 /* Import awt event */
 import java.awt.event.KeyEvent;
 
-/* Import swing */
-import javax.swing.JButton;
-
 /* Class Menu extends Screen */
 public class Menu extends Screen {
-
-	private JButton btn; // test button
 
 	/* Constructor */
 	public Menu(Game game) {
