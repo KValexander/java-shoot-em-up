@@ -8,7 +8,7 @@ import com.main.engine.Collision;
 /* Import screens */
 import com.main.screen.*;
 
-/* Import utils */
+/* Import util */
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
@@ -123,8 +123,8 @@ public class Game extends JPanel {
 		screens = new ArrayList<>();
 
 		/* Screens */
-		Screen scMenu 	= new Menu	(this, render, collision);
-		Screen scSelect = new Select(this, render, collision);
+		Screen scMenu 	= new Menu	(this);
+		Screen scSelect = new Select(this);
 		Screen scLevel 	= new Level	(this, render, collision);
 
 		/* Add screens to list */
@@ -148,6 +148,15 @@ public class Game extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				pKeys.add(e.getKeyCode()); // add pressed key
+
+				/* Test */
+				switch(e.getKeyCode()) {
+					case 49: currentScreen.changeScreen(0); break;
+					case 50: currentScreen.changeScreen(1); break;
+					case 51: currentScreen.changeScreen(2); break;
+				}
+				// System.out.println(e.getKeyCode());
+				/* Test */
 
 				/* Key pressed on the screen */
 				currentScreen.keyPressed(e);

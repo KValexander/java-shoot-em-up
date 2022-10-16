@@ -1,7 +1,7 @@
 /* Package */
 package com.main.sprite;
 
-/* Import Config */
+/* Import main */
 import com.main.Config;
 
 /* Import awt */
@@ -89,7 +89,7 @@ public class Sprite {
 
 			/* Down position */
 			case "down":
-				y = Config.SCREEN[1] - height; 
+				y = Config.SCREEN[1] - (height + height / 2); 
 			break;
 
 		}

@@ -19,6 +19,17 @@ public abstract class Screen {
 	protected Collision collision; // collision
 
 	/* Constructor */
+	public Screen(Game game) {
+		this.game = game;
+	}
+
+	/* Constructor */
+	public Screen(Game game, Render render) {
+		this.game = game;
+		this.render = render;
+	}
+
+	/* Constructor */
 	public Screen(Game game, Render render, Collision collision) {
 		this.game = game;
 		this.render = render;

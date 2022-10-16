@@ -19,8 +19,8 @@ import java.awt.event.KeyEvent;
 public class Select extends Screen {
 
 	/* Constructor */
-	public Select(Game game, Render render, Collision collision) {
-		super(game, render, collision);
+	public Select(Game game) {
+		super(game);
 	}
 
 	/* Action when switching to this screen */

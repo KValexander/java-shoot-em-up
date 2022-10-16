@@ -11,20 +11,23 @@ import com.main.engine.Collision;
 /* Import awt event */
 import java.awt.event.KeyEvent;
 
+/* Import swing */
+import javax.swing.JButton;
+
 /* Class Menu extends Screen */
 public class Menu extends Screen {
 
+	private JButton btn; // test button
+
 	/* Constructor */
-	public Menu(Game game, Render render, Collision collision) {
-		super(game, render, collision);
+	public Menu(Game game) {
+		super(game);
 	}
 
 	/* Action when switching to this screen */
 	@Override
 	public void doEnterScreen() {
 		System.out.println("Menu: enter screen");
-
-		changeScreen(2);
 	}
 
 	/* Action when switching to another screen */

@@ -7,7 +7,7 @@ import com.main.Game;
 /* Import sprite */
 import com.main.sprite.Sprite;
 
-/* Import utils */
+/* Import util */
 import java.util.Set;
 import java.util.HashSet;
 

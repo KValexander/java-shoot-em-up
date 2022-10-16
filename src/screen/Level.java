@@ -13,7 +13,7 @@ import com.main.engine.Collision;
 import com.main.sprite.Player;
 import com.main.sprite.Enemy;
 
-/* Import utils */
+/* Import util */
 import java.util.Set;
 import java.util.HashSet;
 
@@ -38,7 +38,7 @@ public class Level extends Screen {
 
 		/* Player */
 		player = new Player(); // create player
-		player.setPos("center"); // set position for player
+		player.setPos("down"); // set position for player
 		render.addSprite(player); // rendering player
 		collision.addSprite(player); // collision player
 
@@ -61,6 +61,7 @@ public class Level extends Screen {
 
 		/* Player */
 		render.removeSprite(player); // remove player from rendering
+		collision.removeSprite(player); // remove player from collision
 
 		/* Enemies */
 		for(Enemy e : enemies) {
