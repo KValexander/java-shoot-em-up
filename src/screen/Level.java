@@ -9,9 +9,9 @@ import com.main.Game;
 import com.main.engine.Render;
 import com.main.engine.Collision;
 
-/* Import sprite */
-import com.main.sprite.Player;
-import com.main.sprite.Enemy;
+/* Import entity sprite */
+import com.main.entity.sprite.Player;
+import com.main.entity.sprite.Enemy;
 
 /* Import util */
 import java.util.Set;
@@ -39,8 +39,8 @@ public class Level extends Screen {
 		/* Player */
 		player = new Player(); // create player
 		player.setPos("down"); // set position for player
-		render.addSprite(player); // rendering player
-		collision.addSprite(player); // collision player
+		render.add(player); // rendering player
+		collision.add(player); // collision player
 
 		/* Enemies */
 		enemies = new HashSet<>();
@@ -48,8 +48,8 @@ public class Level extends Screen {
 			Enemy enemy = new Enemy(); // create enemy
 			enemy.setPos(Config.SCREEN[0] / 3 * i + enemy.getWidth() / 2, 20);
 			enemies.add(enemy); // add enemy to list
-			render.addSprite(enemy); // rendering enemy
-			collision.addSprite(enemy); // collision enemy
+			render.add(enemy); // rendering enemy
+			collision.add(enemy); // collision enemy
 		}
 
 	}
@@ -60,13 +60,13 @@ public class Level extends Screen {
 		System.out.println("Level: exit screen");
 
 		/* Player */
-		render.removeSprite(player); // remove player from rendering
-		collision.removeSprite(player); // remove player from collision
+		render.remove(player); // remove player from rendering
+		collision.remove(player); // remove player from collision
 
 		/* Enemies */
 		for(Enemy e : enemies) {
-			render.removeSprite(e);
-			collision.removeSprite(e);
+			render.remove(e);
+			collision.remove(e);
 		}
 
 	}

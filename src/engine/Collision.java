@@ -5,8 +5,11 @@ package com.main.engine;
 import com.main.Config;
 import com.main.Game;
 
-/* Import sprite */
-import com.main.sprite.Sprite;
+/* Import entity */
+import com.main.entity.Entity;
+
+/* Import entity sprite */
+import com.main.entity.sprite.Sprite;
 
 /* Import awt */
 import java.awt.Rectangle;

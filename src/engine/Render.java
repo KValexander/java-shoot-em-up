@@ -5,8 +5,11 @@ package com.main.engine;
 import com.main.Config;
 import com.main.Game;
 
-/* Import sprite */
-import com.main.sprite.Sprite;
+/* Import entity */
+import com.main.entity.Entity;
+
+/* Import entity sprite */
+import com.main.entity.sprite.Sprite;
 
 /* Import awt */
 import java.awt.Color;
@@ -29,13 +32,18 @@ public class Render extends Engine {
 
 		/* Rendering sprites */
 		for(Sprite s : sprites) {
-			g2d.drawImage(s.getImage(), s.getX(), s.getY(), game);
+			if(s.isVisible()) { // check visible
 
-			/* Rendering debug rectangle for sprite */
-			if(s.debug) {
-				Color debugColor = (s.onCollision()) ? Color.red : Color.green;
-				g2d.setColor(debugColor);
-				g2d.draw(s.getBounds());
+				/* Render image */
+				g2d.drawImage(s.getImage(), s.getX(), s.getY(), game);
+
+				/* Rendering debug rectangle for sprite */
+				if(s.debug) {
+					Color debugColor = (s.onCollision()) ? Color.red : Color.green;
+					g2d.setColor(debugColor);
+					g2d.draw(s.getBounds());
+				}
+
 			}
 		}
 

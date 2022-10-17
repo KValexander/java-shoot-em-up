@@ -1,5 +1,5 @@
 /* Package */
-package com.main.sprite;
+package com.main.entity.sprite;
 
 /* Import util */
 import java.util.Set;

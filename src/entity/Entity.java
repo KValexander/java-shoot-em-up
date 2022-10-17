@@ -1,8 +1,5 @@
 /* Package */
-package com.main.sprite;
-
-/* Import main */
-import com.main.Config;
+package com.main.entity;
 
 /* Import awt */
 import java.awt.Rectangle;
@@ -13,25 +10,38 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
-/* Class Sprite */
-public class Sprite {
+/* Class Entity */
+public abstract class Entity {
 
-	private BufferedImage image; // image
-	private boolean collision = false; // collision state
+	/* States */
+	private boolean visible = true;
+	private boolean isImage = false;
 
-	public boolean debug = true; // debug
+	/* Image */
+	protected BufferedImage image;
 
 	/* Position */
-	int x = 0;
-	int y = 0;
+	protected int x = 0;
+	protected int y = 0;
 
 	/* Size */
-	int width = 0;
-	int height = 0;
+	protected int width = 0;
+	protected int height = 0;
 
-	/* Acceleration */
-	float dx = 0;
-	float dy = 0;
+	/* Check visible */
+	public boolean isVisible() {
+		return visible;
+	}
+
+	/* Set visible */
+	public void setVisible(boolean v) {
+		visible = v;
+	} 
+
+	/* Check image */
+	public boolean isImage() {
+		return isImage;
+	}
 
 	/* Set image */
 	public void setImage(String src) {
@@ -50,6 +60,9 @@ public class Sprite {
 		width = image.getWidth(null);
 		height = image.getHeight(null);
 
+		/* Is image */
+		isImage = true;
+
 	}
 
 	/* Get image */
@@ -62,38 +75,10 @@ public class Sprite {
 		return new Rectangle(x, y, width, height);
 	}
 
-	/* Set Position (x, y) */
+	/* Set position */
 	public void setPos(int x, int y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	/* Set position (string) */
-	public void setPos(String namePosition) {
-
-		/* Width centering */
-		x = Config.SCREEN[0] / 2 - width / 2;
-
-		/* Prepared positions */
-		switch (namePosition) {
-
-			/* Top position */
-			case "top":
-				y = 0;
-			break;
-
-			/* Center position */ 
-			case "center":
-				y = Config.SCREEN[1] / 2 - height / 2; 
-			break;
-
-			/* Down position */
-			case "down":
-				y = Config.SCREEN[1] - (height + height / 2); 
-			break;
-
-		}
-		
 	}
 
 	/* Set X */
@@ -122,6 +107,16 @@ public class Sprite {
 		height = h;
 	}
 
+	/* Set width */
+	public void setWidth(int w) {
+		width = w;
+	}
+
+	/* Set height */
+	public void setHeight(int h) {
+		height = h;
+	}
+
 	/* Get Width */
 	public int getWidth() {
 		return width;
@@ -130,16 +125,6 @@ public class Sprite {
 	/* Get Height */
 	public int getHeight() {
 		return height;
-	}
-
-	/* Set collision */
-	public void setCollision(boolean collision) {
-		this.collision = collision;
-	}
-
-	/* Check collision */
-	public boolean onCollision() {
-		return collision;
 	}
 
 }

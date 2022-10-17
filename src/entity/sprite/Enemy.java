@@ -1,5 +1,5 @@
 /* Package */
-package com.main.sprite;
+package com.main.entity.sprite;
 
 /* Class Enemy extends Sprite */
 public class Enemy extends Sprite {
