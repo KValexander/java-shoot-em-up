@@ -34,7 +34,7 @@ import javax.swing.AbstractAction;
 /*	Sections:
 		- Varibles
 		- Constructor
-		- Init (Window, Render, Game, Screens)
+		- Init (Window, Engine, Game, Screens)
 		- Init KeyListener
 		- Update
 		- GameLoop (start Timer and tick)
@@ -133,7 +133,7 @@ public class Game extends JPanel {
 		screens.add(scLevel);
 
 		/* Current screen */
-		currentScreen = scMenu;
+		currentScreen = scLevel;
 		currentScreen.doEnterScreen();
 
 	}
