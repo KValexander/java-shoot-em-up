@@ -133,7 +133,6 @@ public class Game extends JPanel {
 		screens.add(scLevel);
 
 		/* Current screen */
-		/* Test */
 		currentScreen = scLevel;
 		currentScreen.doEnterScreen();
 
