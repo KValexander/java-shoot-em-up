@@ -14,8 +14,8 @@ public class Sprite extends Entity {
 	public boolean debug = true; // debug
 
 	/* Direction */
-	float dirX = 0;
-	float dirY = 0;
+	int dirX = 0;
+	int dirY = 0;
 
 	/* Acceleration */
 	float dx = 0;

@@ -11,8 +11,9 @@ import java.util.Set;
 public class Player extends Sprite {
 
 	/* Speed */
-	private int speed = 2;
-	private int limit = 12; // speed limit
+	private float speed = 2;
+	private float speedStop = 0.8f;
+	private float limit = 12; // speed limit
 
 	/* Constructor */
 	public Player() {
@@ -36,64 +37,54 @@ public class Player extends Sprite {
 		else 						dirX = 0;
 
 		/* Acceleration */
-		verticalMove();
-		horizontalMove();
+		dx = acceleration("h");
+		dy = acceleration("v");
 
 		/* Player move */
 		x += dx;
 		y += dy;
 
-		/*  */
-		if(x < 0) x = 0;
-		else if(x > Config.SCREEN[0] - width)
-			x = Config.SCREEN[0] - width;
-
-		if(y < 0) y = 0;
-		else if(y > Config.SCREEN[1] - height)
-			y = Config.SCREEN[1] - height;
+		/* Move limit */
+		x = move_limit(0);
+		y = move_limit(1);
 	
 	}
 
-	/* Vertical move */
-	private void verticalMove() {
+	/* Acceleration */
+	private float acceleration(String axis) {
+		int dir = (axis == "h") ? dirX : dirY;
+		float ax = (axis == "h") ? dx : dy;
 
 		/* Move */
-		if(dirY != 0) {
-			dy += dirY * speed;
-			if(Math.abs(dy) > limit) {
-				dy = dirY * limit;
+		if(dir != 0) {
+			ax += dir * speed;
+			if(Math.abs(ax) > limit) {
+				ax = dir * limit;
 			}
 		}
 
 		/* Stop */
 		else {
-			dy *= 0.8;
-			if(Math.abs(dy) < 0.1) {
-				dy = 0;
+			ax *= speedStop;
+			if(Math.abs(ax) < 0.1) {
+				ax = 0;
 			}
 		}
 
+		return ax;
 	}
 
-	/* Horizontal move */
-	private void horizontalMove() {
+	/* Move limit */
+	private int move_limit(int axis) {
+		int p = (axis == 0) ? x : y;
+		int size = (axis == 0) ? width : height;
 
-		/* Move */
-		if(dirX != 0) {
-			dx += dirX * speed;
-			if(Math.abs(dx) > limit) {
-				dx = dirX * limit;
-			}
-		}
+		if(p < 0) p = 0;
+		else if(p > Config.SCREEN[axis] - size)
+			p = Config.SCREEN[axis] - size;
+		else p = p;
 
-		/* Stop */
-		else {
-			dx *= 0.8;
-			if(Math.abs(dx) < 0.1) {
-				dx = 0;
-			}
-		}
-
+		return p;
 	}
 
 }
