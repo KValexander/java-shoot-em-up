@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /* Class Entity */
-public abstract class Entity {
+public class Entity {
 
 	/* States */
 	private boolean visible = true;

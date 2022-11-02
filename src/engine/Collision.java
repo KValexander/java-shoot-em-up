@@ -25,6 +25,14 @@ public class Collision extends Engine {
 	/* Collision handling */
 	public void collision() {
 
+		/* Sprite collision */
+		sprite_collision();
+
+	}
+
+	/* Sprite collision */
+	private void sprite_collision() {
+
 		for(Sprite s1 : sprites) {
 
 			Rectangle r1 = s1.getBounds();

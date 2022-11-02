@@ -79,7 +79,7 @@ public class Game extends JPanel {
 		/* Window */
 		window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(Config.SCREEN[0], Config.SCREEN[1]);
+		window.setSize(Config.WINDOW_SIZE[0], Config.WINDOW_SIZE[1]);
 		window.setTitle("Mercenaries of fortune");
 		window.setResizable(false);
 
@@ -91,7 +91,7 @@ public class Game extends JPanel {
 		window.setVisible(true);
 
 		/* Game panel */
-		setPreferredSize(new Dimension(Config.SCREEN[0], Config.SCREEN[1]));
+		setPreferredSize(new Dimension(Config.WINDOW_SIZE[0], Config.WINDOW_SIZE[1]));
 		setBackground(new Color(0x4cb5f5));
 		setDoubleBuffered(true);
 		setFocusable(true);

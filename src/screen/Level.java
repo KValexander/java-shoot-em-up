@@ -38,7 +38,7 @@ public class Level extends Screen {
 
 		/* Player */
 		player = new Player(); // create player
-		player.setPos("down"); // set position for player
+		player.setPos(Config.SCREEN[0] / 2 - player.getWidth() / 2, Config.SCREEN[0] / 2 - player.getHeight() / 2); // set position for player
 		render.add(player); // rendering player
 		collision.add(player); // collision player
 
@@ -46,7 +46,7 @@ public class Level extends Screen {
 		enemies = new HashSet<>();
 		for(int i = 0; i < 3; i++) {
 			Enemy enemy = new Enemy(); // create enemy
-			enemy.setPos(Config.SCREEN[0] / 3 * i + enemy.getWidth() / 2, 20);
+			enemy.setPos(Config.SCREEN[0] / 3 * i + 64, 20);
 			enemies.add(enemy); // add enemy to list
 			render.add(enemy); // rendering enemy
 			collision.add(enemy); // collision enemy
